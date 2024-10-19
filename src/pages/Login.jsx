@@ -52,7 +52,7 @@ const Login = () => {
             Login to Dashboard
           </h1>
           <p className="font-medium pb-6">Fill the below form to login</p>
-          <div className="flex flex-col md:flex-row justify-between gap-4">
+          {/* <div className="flex flex-col md:flex-row justify-between gap-4">
             <button className="flex gap-2 py-2 px-4 md:px-6 w-full md:w-auto border-2 rounded-md justify-center items-center hover:text-white hover:bg-[#6b43dd] transition-all duration-300">
               <FaGoogle size={22} />
               <p>Sign in with Google</p>
@@ -61,14 +61,14 @@ const Login = () => {
               <IoLogoApple size={24} />
               <p>Sign in with Apple</p>
             </button>
-          </div>
+          </div> */}
         </div>
 
-        <div className="flex items-center space-x-2 mt-6">
+        {/* <div className="flex items-center space-x-2 mt-6">
           <hr className="flex-grow border-gray-300" />
           <p>OR</p>
           <hr className="flex-grow border-gray-300" />
-        </div>
+        </div> */}
 
         <form
           className="flex flex-col gap-6 mt-4"

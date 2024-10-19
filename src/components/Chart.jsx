@@ -53,7 +53,7 @@ const Chart = () => {
     <ResponsiveContainer width={"100%"} height={300}>
       <BarChart width={150} height={40} data={chartData}>
         <XAxis dataKey="name" />
-        <YAxis domain={[1, 20]} /> {/* Set Y-Axis from 1 to 20 */}
+        <YAxis domain={[1, UnTrashedtasks.length]} /> {/* Set Y-Axis from 1 to 20 */}
         <Tooltip />
         <Legend />
         <CartesianGrid strokeDasharray="3 3" />

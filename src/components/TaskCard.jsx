@@ -14,6 +14,7 @@ import { FaList } from "react-icons/fa";
 import UserInfo from "./UserInfo";
 import { IoMdAdd } from "react-icons/io";
 import AddSubTask from "./task/AddSubTask";
+import { useNavigate } from "react-router-dom";
 
 const ICONS = {
   high: <MdKeyboardDoubleArrowUp />,
@@ -24,6 +25,8 @@ const ICONS = {
 const TaskCard = ({ task }) => {
   const { user } = useSelector((state) => state.auth);
   const [open, setOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   return (
     <>
@@ -47,7 +50,12 @@ const TaskCard = ({ task }) => {
             <div
               className={clsx("w-4 h-4 rounded-full", TASK_TYPE[task.stage])}
             />
-            <h4 className="line-clamp-1 text-black">{task?.title}</h4>
+            <h4
+              onClick={() => navigate(`/task/${task._id}`)}
+              className="line-clamp-1 text-black cursor-pointer"
+            >
+              {task?.title}
+            </h4>
           </div>
           <span className="text-sm text-gray-600">
             {formatDate(new Date(task?.date))}

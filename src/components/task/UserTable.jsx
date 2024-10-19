@@ -5,7 +5,7 @@ import clsx from "clsx";
 import { BGS, PRIOTITYSTYELS, TASK_TYPE, getInitials } from "../../utils";
 
 const UserTable = ({ users }) => {
-  console.log("🚀 ~ UserTable ~ users:", users)
+  console.log("🚀 ~ UserTable ~ users:", users);
   const TableHeader = () => (
     <thead className="border-b border-gray-300 ">
       <tr className="text-black  text-left">

@@ -33,6 +33,10 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ["User"],
     }),
+    getUsers: builder.query({
+      query: () => "/User/login",
+      providesTags: ["User"],
+    }),
 
     // Task Endpoints
     createTask: builder.mutation({
@@ -130,6 +134,7 @@ export const {
   useCreateTaskMutation,
   useDuplicateTaskMutation,
   useGetTasksQuery,
+  useGetUsersQuery,
   useUpdateTaskMutation,
   useAddSubTaskMutation,
   useTrashTaskMutation,

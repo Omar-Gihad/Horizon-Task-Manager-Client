@@ -7,7 +7,7 @@ import { getInitials } from "../utils";
 import clsx from "clsx";
 import ConfirmatioDialog, { UserAction } from "../components/Dialogs";
 import AddUser from "../components/AddUser";
-// import { useLoginUserMutation } from "../redux/slices/apiSlice";
+import { useGetUsersQuery } from "../redux/slices/apiSlice";
 
 const Users = () => {
   const [openDialog, setOpenDialog] = useState(false);
@@ -15,9 +15,12 @@ const Users = () => {
   const [openAction, setOpenAction] = useState(false);
   const [selected, setSelected] = useState(null);
 
-  // const { data: usersData, isLoading, error } = useLoginUserMutation();
-  // const users = usersData;
-  // console.log("🚀 ~ Users ~ users:", users)
+  // Fetch tasks using RTK Query
+  const { data: usersData, isLoading, error } = useGetUsersQuery();
+
+  // Check loading and error states
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Failed to load users.</div>;
 
   const userActionHandler = () => {};
   const deleteHandler = () => {};
@@ -48,7 +51,7 @@ const Users = () => {
     <tr className="border-b border-gray-200 text-gray-600 hover:bg-gray-400/10">
       <td className="p-2">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-full text-white flex items-center justify-center text-sm bg-blue-700">
+          <div className="w-9 h-9 rounded-full text-white flex items-center justify-center text-sm bg-[#6b43dd]">
             <span className="text-xs md:text-sm text-center p-5">
               {getInitials(user.name)}
             </span>
@@ -66,7 +69,7 @@ const Users = () => {
           // onClick={() => userStatusClick(user)}
           className={clsx(
             "w-fit px-4 py-1 rounded-full",
-            user?.isActive ? "bg-purple-200" : "bg-yellow-100"
+            user?.isActive ? "bg-green-200" : "bg-red-200"
           )}
         >
           {user?.isActive ? "Active" : "Disabled"}
@@ -109,7 +112,7 @@ const Users = () => {
             <table className="w-full mb-5">
               <TableHeader />
               <tbody>
-                {summary.users?.map((user, index) => (
+                {usersData?.map((user, index) => (
                   <TableRow key={index} user={user} />
                 ))}
               </tbody>

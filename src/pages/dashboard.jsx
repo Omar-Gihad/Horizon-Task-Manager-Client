@@ -8,7 +8,7 @@ import Chart from "../components/Chart";
 import TaskTable from "../components/task/TaskTable";
 import UserTable from "../components/task/UserTable";
 import { useSelector } from "react-redux";
-import { useGetTasksQuery } from "../redux/slices/apiSlice";
+import { useGetTasksQuery, useGetUsersQuery } from "../redux/slices/apiSlice";
 import { summary } from "../assets/data";
 
 const Dashboard = () => {
@@ -23,6 +23,13 @@ const Dashboard = () => {
 
   // Extract tasks from the fetched data
   const tasks = tasksData?.tasks || [];
+
+  // Fetch tasks using RTK Query
+  const { data: usersData } = useGetUsersQuery();
+
+  // // Check loading and error states
+  // if (isLoading) return <div>Loading...</div>;
+  // if (error) return <div>Failed to load tasks.</div>;
 
   const UnTrashedtasks = tasks.filter((item) => !item.isTrashed);
 
@@ -105,7 +112,7 @@ const Dashboard = () => {
         <TaskTable tasks={UnTrashedtasks} />
 
         {/* User Table - Assuming you're fetching users elsewhere */}
-        <UserTable users={summary.users} />
+        <UserTable users={usersData} />
       </div>
     </div>
   );

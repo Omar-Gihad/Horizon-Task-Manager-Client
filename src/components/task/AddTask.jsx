@@ -11,6 +11,8 @@ import {
   useCreateTaskMutation,
   useUpdateTaskMutation,
 } from "../../redux/slices/apiSlice";
+import { toast } from "sonner";
+
 
 const LISTS = ["TODO", "IN-PROGRESS", "COMPLETED"];
 const PRIORITY = ["HIGH", "MEDIUM", "NORMAL", "LOW"];
@@ -60,9 +62,11 @@ const AddTask = ({ open, setOpen, task }) => {
       if (task) {
         // If editing, update the task
         await updateTask({ id: task._id, ...taskData }).unwrap();
+        toast.success("Task updated successfully!");
       } else {
         // If creating a new task
         await createTask(taskData).unwrap();
+        toast.success("Task added successfully!");
       }
       setOpen(false); // Close the modal on success
 

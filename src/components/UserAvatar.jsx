@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getInitials } from "../utils";
 import { logout, changePassword } from "../redux/slices/authSlice";
-import Modal from "./Modal"; // Import the Modal component
+import Modal from "./Modal";
+import { toast } from "sonner";
 
 const UserAvatar = () => {
   const [openPassword, setOpenPassword] = useState(false);
@@ -29,8 +30,8 @@ const UserAvatar = () => {
     e.preventDefault();
 
     try {
-      await dispatch(changePassword({ password:newPassword }));
-      alert("Password changed successfully");
+      await dispatch(changePassword({ password: newPassword }));
+      toast.success("Password changed successfully");
       setOpenPassword(false);
     } catch (error) {
       console.error("Password change failed:", error);

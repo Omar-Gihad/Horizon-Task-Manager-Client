@@ -33,7 +33,7 @@ const TaskDialog = ({ task }) => {
         title: `${task.title} (Copy)`,
       }).unwrap();
       // Optionally, you can show a success notification or handle UI updates here
-      console.log("Task duplicated successfully!");
+      toast.success("Task duplicated successfully!");
     } catch (error) {
       // Handle the error (e.g., show an error notification)
       console.error("Failed to duplicate task:", error);

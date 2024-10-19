@@ -27,6 +27,7 @@ const AddSubTask = ({ open, setOpen, id }) => {
       // Call the mutation to add the subtask
       await addSubTask({ taskId: id, subtask: subTaskData }).unwrap();
       setOpen(false); // Close the modal on success
+      toast.success("Subtask added successfully!");
     } catch (error) {
       console.error("Failed to add subtask: ", error);
     }

@@ -7,7 +7,7 @@ import {
 } from "react-icons/md";
 import { FaTasks, FaTrashAlt, FaUsers } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { setOpenSidebar } from "../redux/slices/authSlice";
 import clsx from "clsx";
 import { assets } from "../assets/assets";
@@ -70,12 +70,12 @@ const Sidebar = () => {
         to={el.link}
         onClick={closeSidebar}
         className={clsx(
-          "flex gap-3 items-center w-full px-3 py-2 rounded-xl hover:bg-[#d0c2f3]",
-          path === el.link.split("/")[0] ? "bg-[#6b43dd] text-neutral-100" : ""
+          "flex gap-3 items-center w-full px-3 py-2 rounded-xl",
+          path === el.link.split("/")[0] ? "bg-[#6b43dd] text-neutral-100" : "hover:bg-violet-100"
         )}
       >
         {el.icon}
-        <span className="hover:text-[#6b43dd]">{el.label}</span>
+        <span className={`${path === el.link.split("/")[0] ?``:`hover:text-white`}`}>{el.label}</span>
       </Link>
     );
   };

@@ -54,9 +54,9 @@ const TaskCard = ({ task }) => {
               onClick={() => navigate(`/task/${task._id}`)}
               className={clsx(
                 "line-clamp-1 hover:text-white text-black cursor-pointer rounded-full p-1.5",
-                `hover:${task.stage == "todo" && "text-blue-600"}
-              hover:${task.stage == "completed" && "text-green-600"}
-              hover:${task.stage == "in-progress" && "text-yellow-600"}`
+                `${task.stage == "todo" && "hover:text-blue-600"}
+              ${task.stage == "completed" && "hover:text-green-600"}
+              ${task.stage == "in-progress" && "hover:text-yellow-600"}`
               )}
             >
               {task?.title}

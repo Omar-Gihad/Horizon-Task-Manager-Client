@@ -109,9 +109,9 @@ const Table = ({ tasks, setValue }) => {
             onClick={() => navigate(`/task/${task._id}`)}
             className={clsx(
               "w-full line-clamp-2 flex-1 text-base text-black cursor-pointer",
-              `hover:${task.stage == "todo" && "text-blue-600"}
-              hover:${task.stage == "completed" && "text-green-600"}
-              hover:${task.stage == "in-progress" && "text-yellow-600"}`
+              `${task.stage == "todo" && "hover:text-blue-600"}
+              ${task.stage == "completed" && "hover:text-green-600"}
+              ${task.stage == "in-progress" && "hover:text-yellow-600"}`
             )}
           >
             {task?.title}

@@ -1,4 +1,5 @@
 import { Tab } from "@headlessui/react";
+import SortBy from "./SortBy";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -6,9 +7,9 @@ function classNames(...classes) {
 
 export default function Tabs({ tabs, setSelected, children }) {
   return (
-    <div className="w-full px-1 sm:px-0">
+    <div className="w-30px px-1 sm:px-0">
       <Tab.Group>
-        <Tab.List className="flex justify-between md:justify-start md:space-x-6  rounded-xl md:p-1">
+        <Tab.List className="flex justify-start space-x-6 rounded-xl p-1">
           {tabs.map((tab, index) => (
             <Tab
               key={tab.title}

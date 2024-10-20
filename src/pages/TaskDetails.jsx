@@ -86,7 +86,7 @@ const TaskDetails = () => {
   const { data: tasksData, isLoading, error } = useGetTasksQuery();
 
   // Check loading and error states
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loading/>;
   if (error) return <div>Failed to load tasks.</div>;
 
   // Extract tasks from the fetched data

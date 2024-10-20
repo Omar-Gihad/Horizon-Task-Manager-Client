@@ -16,6 +16,7 @@ import Title from "../components/Title";
 import Button from "../components/Button";
 import { PRIOTITYSTYELS, TASK_TYPE } from "../utils";
 import ConfirmatioDialog from "../components/Dialogs";
+import Loading from "../components/Loader";
 
 const ICONS = {
   high: <MdKeyboardDoubleArrowUp />,
@@ -33,10 +34,10 @@ const Trash = () => {
   const { data: tasksData, isLoading, error } = useGetTasksQuery();
 
   const [restoreTask] = useRestoreTaskMutation(); // Hook for restoring a single task
-  const [deleteTask] = useDeleteTaskMutation();  // Hook for deleting a single task
+  const [deleteTask] = useDeleteTaskMutation(); // Hook for deleting a single task
 
   // Check loading and error states
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loading />;
   if (error) return <div>Failed to load tasks.</div>;
 
   // Extract tasks from the fetched data

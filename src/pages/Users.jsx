@@ -7,10 +7,10 @@ import clsx from "clsx";
 import ConfirmatioDialog, { UserAction } from "../components/Dialogs";
 import AddUser from "../components/AddUser";
 import { useGetUsersQuery } from "../redux/slices/apiSlice";
-import { Loader } from '@mantine/core';
+import { Loader } from "@mantine/core";
+import Loading from "../components/Loader";
 
 <Loader color="#6b43dd" type="bars" />;
-
 
 const Users = () => {
   const [openDialog, setOpenDialog] = useState(false);
@@ -22,7 +22,7 @@ const Users = () => {
   const { data: usersData, isLoading, error } = useGetUsersQuery();
 
   // Check loading and error states
-  if (isLoading) return <Loader color="#6b43dd" type="bars" />;
+  if (isLoading) return <Loading />;
   if (error) return <div>Failed to load users.</div>;
 
   const userActionHandler = () => {};

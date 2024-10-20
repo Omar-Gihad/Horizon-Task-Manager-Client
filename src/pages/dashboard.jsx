@@ -9,7 +9,8 @@ import TaskTable from "../components/task/TaskTable";
 import UserTable from "../components/task/UserTable";
 import { useSelector } from "react-redux";
 import { useGetTasksQuery, useGetUsersQuery } from "../redux/slices/apiSlice";
-import { Loader } from '@mantine/core';
+import { Loader } from "@mantine/core";
+import Loading from "../components/Loader";
 
 const Dashboard = () => {
   const { user } = useSelector((state) => state.auth);
@@ -29,21 +30,11 @@ const Dashboard = () => {
   } = useGetUsersQuery();
 
   // Check loading and error states for tasks
-  if (isLoadingTasks)
-    return (
-      <div>
-        <Loader color="#6b43dd" type="bars" />
-      </div>
-    );
+  if (isLoadingTasks) return <Loading />;
   if (tasksError) return <div>Failed to load tasks.</div>;
 
   // Check loading and error states for users
-  if (isLoadingUsers)
-    return (
-      <div>
-        Users are loading...
-      </div>
-    );
+  if (isLoadingUsers) return <Loading />;
   if (usersError) return <div>Failed to load users.</div>;
 
   // Extract tasks from the fetched data

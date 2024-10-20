@@ -11,7 +11,7 @@ const UserTable = ({ users }) => {
       <tr className="text-black  text-left">
         <th className="py-2">Full Name</th>
         <th className="py-2">Status</th>
-        <th className="py-2">Created</th>
+        <th className="py-2">Deadline{/* Created */}</th>
       </tr>
     </thead>
   );

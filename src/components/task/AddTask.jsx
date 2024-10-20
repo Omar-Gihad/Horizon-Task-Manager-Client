@@ -27,7 +27,7 @@ const AddTask = ({ open, setOpen, task, label }) => {
   } = useForm();
 
   const [team, setTeam] = useState([]);
-  const [stage, setStage] = useState(label);
+  const [stage, setStage] = useState(label || LISTS[0]);
   const [priority, setPriority] = useState(PRIORITY[2]);
   const [assets, setAssets] = useState([]);
   const [uploading, setUploading] = useState(false);

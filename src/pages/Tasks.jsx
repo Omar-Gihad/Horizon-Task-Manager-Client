@@ -79,14 +79,14 @@ const Tasks = () => {
       <div className="flex items-center justify-between mb-4">
         <Title title={status ? `${status} Tasks` : "Tasks"} />
 
-        {/* {!status && user.data.user.isAdmin && (
+        {!status && user.data.user.isAdmin && (
           <Button
             onClick={() => setOpen(true)}
             label="Create Task"
             icon={<IoMdAdd className="text-lg" />}
-            className="hidden md:flex flex-row-reverse gap-1 items-center bg-[#6b43dd] text-white rounded-md py-2 2xl:py-2.5"
+            className="hidden md:flex flex-row-reverse gap-1 items-center bg-white text-black hover:text-[#6b43dd] rounded-md py-2 2xl:py-2.5"
           />
-        )} */}
+        )}
       </div>
 
       <div className="flex flex-col-reverse gap-2 md:gap-0 md:flex-row md:justify-between md:items-center">

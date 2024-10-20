@@ -16,6 +16,7 @@ import ConfirmatioDialog from "../Dialogs";
 import { useSelector } from "react-redux";
 import { useTrashTaskMutation } from "../../redux/slices/apiSlice";
 import AddTask from "./AddTask";
+import { useNavigate } from "react-router-dom";
 
 const ICONS = {
   high: <MdKeyboardDoubleArrowUp />,
@@ -30,6 +31,8 @@ const Table = ({ tasks, setValue }) => {
   const [openEdit, setOpenEdit] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   const [selected, setSelected] = useState(null);
+
+  const navigate = useNavigate();
 
   const selectedTask = tasks.find((item) => item._id == selected);
   console.log("🚀 ~ Table ~ selectedTask:", selectedTask);
@@ -82,7 +85,7 @@ const Table = ({ tasks, setValue }) => {
         </th>
         <th onClick={() => setValue("date")} className="py-2">
           <span className="flex items-center justify-center md:justify-start">
-            Created
+            Deadline{/* Created */}
             <span className="ml-1">
               <BiChevronDown className="cursor-pointer" />
             </span>
@@ -102,7 +105,15 @@ const Table = ({ tasks, setValue }) => {
           <div
             className={clsx("w-4 h-4 rounded-full", TASK_TYPE[task.stage])}
           />
-          <p className="w-full line-clamp-2 flex-1 text-base text-black">
+          <p
+            onClick={() => navigate(`/task/${task._id}`)}
+            className={clsx(
+              "w-full line-clamp-2 flex-1 text-base text-black cursor-pointer",
+              `hover:${task.stage == "todo" && "text-blue-600"}
+              hover:${task.stage == "completed" && "text-green-600"}
+              hover:${task.stage == "in-progress" && "text-yellow-600"}`
+            )}
+          >
             {task?.title}
           </p>
         </div>

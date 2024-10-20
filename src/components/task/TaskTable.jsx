@@ -23,7 +23,7 @@ const TaskTable = ({ tasks }) => {
         <th className="w-1/3 md:w-auto py-2">Task Title</th>
         <th className="w-1/3 md:w-auto px-3 py-2">Priority</th>
         <th className="w-1/3 md:w-auto py-2">Team</th>
-        <th className="py-2 hidden md:block">Created</th>
+        <th className="py-2 hidden md:block">Deadline{/* Created */}</th>
       </tr>
     </thead>
   );

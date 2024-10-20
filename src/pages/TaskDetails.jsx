@@ -86,7 +86,7 @@ const TaskDetails = () => {
   const { data: tasksData, isLoading, error } = useGetTasksQuery();
 
   // Check loading and error states
-  if (isLoading) return <Loading/>;
+  if (isLoading) return <Loading />;
   if (error) return <div>Failed to load tasks.</div>;
 
   // Extract tasks from the fetched data
@@ -142,7 +142,8 @@ const TaskDetails = () => {
                 </div>
 
                 <p className="text-gray-500">
-                  Created At: {new Date(task?.date).toDateString()}
+                  Deadline{/* Created */} At:{" "}
+                  {new Date(task?.date).toDateString()}
                 </p>
 
                 <div className="flex items-center gap-8 p-4 border-y border-gray-200">

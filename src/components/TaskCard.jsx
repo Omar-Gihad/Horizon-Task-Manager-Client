@@ -46,13 +46,18 @@ const TaskCard = ({ task }) => {
         </div>
 
         <>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 my-1">
             <div
               className={clsx("w-4 h-4 rounded-full", TASK_TYPE[task.stage])}
             />
             <h4
               onClick={() => navigate(`/task/${task._id}`)}
-              className="line-clamp-1 text-black cursor-pointer"
+              className={clsx(
+                "line-clamp-1 hover:text-white text-black cursor-pointer rounded-full p-1.5",
+                `hover:${task.stage == "todo" && "text-blue-600"}
+              hover:${task.stage == "completed" && "text-green-600"}
+              hover:${task.stage == "in-progress" && "text-yellow-600"}`
+              )}
             >
               {task?.title}
             </h4>

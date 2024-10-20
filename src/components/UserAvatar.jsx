@@ -33,6 +33,7 @@ const UserAvatar = () => {
       await dispatch(changePassword({ password: newPassword }));
       toast.success("Password changed successfully");
       setOpenPassword(false);
+      setNewPassword("");
     } catch (error) {
       console.error("Password change failed:", error);
     }
@@ -110,10 +111,10 @@ const UserAvatar = () => {
             />
           </div>
 
-          <div className="flex justify-end">
+          <div className="inline absolute right-[20px] bottom-6">
             <button
               type="submit"
-              className="px-4 py-2 bg-[#6b43dd] text-white rounded-lg"
+              className="px-4 py-2 bg-white text-black border border-black rounded-lg"
               disabled={isLoading}
             >
               {isLoading ? "Changing..." : "Change Password"}

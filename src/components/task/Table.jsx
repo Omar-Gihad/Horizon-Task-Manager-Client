@@ -63,9 +63,9 @@ const Table = ({ tasks, setValue }) => {
 
   const TableHeader = () => (
     <thead className=" w-full border-b border-gray-300">
-      <tr className="w-full text-black text-center md:text-left">
+      <tr className="w-fulltext-black text-center md:text-left">
         <th onClick={() => setValue("title")} className="py-2">
-          <span className="flex items-center">
+          <span className="flex items-center justify-center md:justify-start">
             Title
             <span className="ml-1">
               <BiChevronDown className="cursor-pointer" />
@@ -73,22 +73,22 @@ const Table = ({ tasks, setValue }) => {
           </span>
         </th>
         <th onClick={() => setValue("priority")} className="py-2">
-          <span className="flex items-center">
+          <span className="flex items-center justify-center md:justify-start">
             Priority
-            <span className="ml-1">
+            <span className="ml-1 mr-2">
               <BiChevronDown className="cursor-pointer" />
             </span>
           </span>
         </th>
         <th onClick={() => setValue("date")} className="py-2">
-          <span className="flex items-center">
+          <span className="flex items-center justify-center md:justify-start">
             Created
             <span className="ml-1">
               <BiChevronDown className="cursor-pointer" />
             </span>
           </span>
         </th>
-        <th className="py-2 pr-2">Assets</th>
+        <th className="py-2 ">Assets</th>
         <th className="py-2">Team </th>
         <th className="py-2 ">Actions</th>
       </tr>
@@ -109,11 +109,11 @@ const Table = ({ tasks, setValue }) => {
       </td>
 
       <td className="py-2">
-        <div className={"flex gap-1 items-center"}>
+        <div className={"flex gap-1 items-center px-5 md:px-0"}>
           <span className={clsx("text-lg", PRIOTITYSTYELS[task?.priority])}>
             {ICONS[task?.priority]}
           </span>
-          <span className="capitalize line-clamp-1">
+          <span className="capitalize hidden md:inline line-clamp-1">
             {task?.priority} Priority
           </span>
         </div>
@@ -142,7 +142,7 @@ const Table = ({ tasks, setValue }) => {
         </div>
       </td>
 
-      <td className="py-2">
+      <td className="py-2 px-4 md:px-0">
         <div className="flex">
           {task?.team?.map((m, index) => (
             <div
@@ -161,7 +161,7 @@ const Table = ({ tasks, setValue }) => {
       <td className="py-2 flex gap-2 md:gap-4 justify-">
         {user.data.user.isAdmin && (
           <Button
-            className="text-blue-600 hover:text-blue-500 font-semibold sm:px-0"
+            className="text-blue-600 hover:text-blue-500 font-semibold sm:px-1"
             label="Edit"
             type="button"
             onClick={() => editClick(task._id)}
@@ -169,7 +169,7 @@ const Table = ({ tasks, setValue }) => {
         )}
         {user.data.user.isAdmin && (
           <Button
-            className="text-red-700 hover:text-red-500 sm:px-0 text-sm md:text-base"
+            className="text-red-700 hover:text-red-500 sm:px-1 text-sm md:text-base"
             label="Delete"
             type="button"
             onClick={() => deleteClicks(task._id)}

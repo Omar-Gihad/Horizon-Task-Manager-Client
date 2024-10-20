@@ -37,10 +37,10 @@ const Modal = ({ isOpen, onClose, children }) => {
                 </Dialog.Title>
                 <div className="mt-2">{children}</div>
 
-                <div className="mt-4">
+                <div className="inline mt-4">
                   <button
                     type="button"
-                    className="px-4 py-2 bg-[#6b43dd] text-white rounded-md"
+                    className="px-4 py-2 bg-white text-black  border border-black rounded-md"
                     onClick={onClose}
                   >
                     Close

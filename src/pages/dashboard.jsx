@@ -8,22 +8,46 @@ import Chart from "../components/Chart";
 import TaskTable from "../components/task/TaskTable";
 import UserTable from "../components/task/UserTable";
 import { useSelector } from "react-redux";
-import { useGetTasksQuery } from "../redux/slices/apiSlice";
-import { summary } from "../assets/data";
+import { useGetTasksQuery, useGetUsersQuery } from "../redux/slices/apiSlice";
+import { Loader } from '@mantine/core';
 
 const Dashboard = () => {
   const { user } = useSelector((state) => state.auth);
 
   // Fetch tasks using RTK Query
-  const { data: tasksData, isLoading, error } = useGetTasksQuery();
+  const {
+    data: tasksData,
+    isLoading: isLoadingTasks,
+    error: tasksError,
+  } = useGetTasksQuery();
 
-  // Check loading and error states
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Failed to load tasks.</div>;
+  // Fetch users using RTK Query
+  const {
+    data: usersData,
+    isLoading: isLoadingUsers,
+    error: usersError,
+  } = useGetUsersQuery();
+
+  // Check loading and error states for tasks
+  if (isLoadingTasks)
+    return (
+      <div>
+        <Loader color="#6b43dd" type="bars" />
+      </div>
+    );
+  if (tasksError) return <div>Failed to load tasks.</div>;
+
+  // Check loading and error states for users
+  if (isLoadingUsers)
+    return (
+      <div>
+        Users are loading...
+      </div>
+    );
+  if (usersError) return <div>Failed to load users.</div>;
 
   // Extract tasks from the fetched data
   const tasks = tasksData?.tasks || [];
-
   const UnTrashedtasks = tasks.filter((item) => !item.isTrashed);
 
   // Calculate stats from tasks
@@ -105,7 +129,7 @@ const Dashboard = () => {
         <TaskTable tasks={UnTrashedtasks} />
 
         {/* User Table - Assuming you're fetching users elsewhere */}
-        <UserTable users={summary.users} />
+        <UserTable users={usersData} />
       </div>
     </div>
   );

@@ -78,6 +78,7 @@ const Login = () => {
             placeholder="email@example.com"
             type="email"
             name="email"
+            value="newPerson@hotmail.com"
             label="Email Address"
             className="w-full rounded-lg"
             register={register("email", {
@@ -89,6 +90,7 @@ const Login = () => {
             placeholder="your password"
             type="password"
             name="password"
+            value="123456789"
             label="Password"
             className="w-full rounded-lg"
             register={register("password", {

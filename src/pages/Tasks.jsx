@@ -14,6 +14,8 @@ import { useGetTasksQuery } from "../redux/slices/apiSlice";
 import Table from "../components/task/Table";
 import AddTask from "../components/task/AddTask";
 import { useSelector } from "react-redux";
+import { Loader } from "@mantine/core";
+import SortBy from "../components/SortBy";
 
 const TABS = [
   { title: "Board View", icon: <MdGridView /> },
@@ -41,16 +43,15 @@ const Tasks = () => {
   const { data: tasksData, isLoading, error } = useGetTasksQuery();
 
   // Check loading and error states
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loader color="#6b43dd" type="bars" />;
   if (error) return <div>Failed to load tasks.</div>;
 
   // Extract tasks from the fetched data
   const tasks = tasksData?.tasks || [];
   console.log("🚀 ~ Tasks ~ tasks:", tasks);
 
-  const unTrashedTasks = tasks
-    .filter((item) => !item.isTrashed)
-    .sort((a, b) => new Date(b.date) - new Date(a.date));
+  const unTrashedTasks = tasks.filter((item) => !item.isTrashed);
+  // .sort((a, b) => new Date(b.date) - new Date(a.date));
 
   const filteredTasks = unTrashedTasks.filter((el) => {
     if (status) {
@@ -80,6 +81,7 @@ const Tasks = () => {
       </div>
 
       <Tabs tabs={TABS} setSelected={setSelected}>
+        {/* <SortBy/> */}
         {!status && (
           <div className="w-full flex justify-between gap-4 py-4">
             <TaskTitle label="To Do" className={TASK_TYPE.todo} />

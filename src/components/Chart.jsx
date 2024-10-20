@@ -23,14 +23,17 @@ const Chart = () => {
   console.log("🚀 ~ Tasks ~ tasks:", tasks);
 
   const UnTrashedtasks = tasks.filter((item) => !item.isTrashed);
-  console.log("🚀 ~ Chart ~ UnTrashedtasks:", UnTrashedtasks)
+  console.log("🚀 ~ Chart ~ UnTrashedtasks:", UnTrashedtasks);
 
   // Calculate total tasks for each priority (High, Medium, Normal)
   const highTasks = UnTrashedtasks.filter((task) => task.priority === "high");
-  const mediumTasks = UnTrashedtasks.filter((task) => task.priority === "medium");
-  const normalTasks = UnTrashedtasks.filter((task) => task.priority === "normal");
+  const mediumTasks = UnTrashedtasks.filter(
+    (task) => task.priority === "medium"
+  );
+  const normalTasks = UnTrashedtasks.filter(
+    (task) => task.priority === "normal"
+  );
 
-  
   const chartData = [
     {
       name: "High",
@@ -53,7 +56,13 @@ const Chart = () => {
     <ResponsiveContainer width={"100%"} height={300}>
       <BarChart width={150} height={40} data={chartData}>
         <XAxis dataKey="name" />
-        <YAxis domain={[1, UnTrashedtasks.length]} /> {/* Set Y-Axis from 1 to 20 */}
+        <YAxis
+          domain={[
+            1,
+            Math.max(highTasks.length, mediumTasks.length, normalTasks.length)+1,
+          ]}
+        />{" "}
+        {/* Set Y-Axis from 1 to 20 */}
         <Tooltip />
         <Legend />
         <CartesianGrid strokeDasharray="3 3" />

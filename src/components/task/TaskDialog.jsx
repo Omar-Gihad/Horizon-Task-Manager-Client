@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AiTwotoneFolderOpen } from "react-icons/ai";
 import { BsThreeDots } from "react-icons/bs";
 import { HiDuplicate } from "react-icons/hi";
-import { MdAdd, MdOutlineEdit } from "react-icons/md";
+import { MdAdd, MdOutlineEdit, MdTaskAlt } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Menu, Transition } from "@headlessui/react";
 import AddTask from "./AddTask";
@@ -12,9 +12,9 @@ import ConfirmatioDialog from "../Dialogs";
 import {
   useDuplicateTaskMutation,
   useTrashTaskMutation,
+  useUpdateTaskMutation,
 } from "../../redux/slices/apiSlice";
 import { toast } from "sonner";
-
 
 const TaskDialog = ({ task }) => {
   const [open, setOpen] = useState(false);
@@ -59,6 +59,24 @@ const TaskDialog = ({ task }) => {
         console.error("Error trashing task:", error);
       }
     }
+    setOpenDialog(false);
+  };
+
+  const [updateTask, { isLoading: isUpdating }] = useUpdateTaskMutation();
+
+  const completeHandler = async () => {
+    const updatedTask = { ...task, stage: "completed" };
+    try {
+      if (task.stage != "completed") {
+        // Update the task's isTrashed property to true
+        await updateTask({ id: task._id, ...updatedTask }).unwrap();
+        toast.success("Task status updated!");
+      }
+    } catch (error) {
+      toast.error("Failed to update Task status.");
+      console.error("Error updating Task status:", error);
+    }
+
     setOpenDialog(false);
   };
 
@@ -119,6 +137,26 @@ const TaskDialog = ({ task }) => {
                     )}
                   </Menu.Item>
                 ))}
+              </div>
+
+              <div
+                className={`${
+                  task.stage == "completed" && "hidden"
+                } px-1 py-1 space-y-2`}
+              >
+                <Menu.Item>
+                  {({ active }) => (
+                    <button
+                      onClick={() => completeHandler()}
+                      className={`${
+                        active ? "bg-[#6b43dd] text-white" : "text-gray-900"
+                      } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                    >
+                      <MdTaskAlt className="mr-2 h-5 w-5" aria-hidden="true" />
+                      Mark as complete
+                    </button>
+                  )}
+                </Menu.Item>
               </div>
 
               <div className="px-1 py-1">

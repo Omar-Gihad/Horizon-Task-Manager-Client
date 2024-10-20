@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import Title from "../components/Title";
 import Button from "../components/Button";
 import { IoMdAdd } from "react-icons/io";
-import { summary } from "../assets/data";
 import { getInitials } from "../utils";
 import clsx from "clsx";
 import ConfirmatioDialog, { UserAction } from "../components/Dialogs";
 import AddUser from "../components/AddUser";
 import { useGetUsersQuery } from "../redux/slices/apiSlice";
+import { Loader } from '@mantine/core';
+
+<Loader color="#6b43dd" type="bars" />;
+
 
 const Users = () => {
   const [openDialog, setOpenDialog] = useState(false);
@@ -19,7 +22,7 @@ const Users = () => {
   const { data: usersData, isLoading, error } = useGetUsersQuery();
 
   // Check loading and error states
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loader color="#6b43dd" type="bars" />;
   if (error) return <div>Failed to load users.</div>;
 
   const userActionHandler = () => {};

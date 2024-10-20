@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BiMessageAltDetail } from "react-icons/bi";
+import { BiChevronDown, BiMessageAltDetail } from "react-icons/bi";
 import {
   MdAttachFile,
   MdKeyboardArrowDown,
@@ -23,7 +23,7 @@ const ICONS = {
   low: <MdKeyboardArrowDown />,
 };
 
-const Table = ({ tasks }) => {
+const Table = ({ tasks, setValue }) => {
   const { user } = useSelector((state) => state.auth);
 
   const [open, setOpen] = useState(false);
@@ -62,14 +62,35 @@ const Table = ({ tasks }) => {
   };
 
   const TableHeader = () => (
-    <thead className="w-full border-b border-gray-300">
+    <thead className=" w-full border-b border-gray-300">
       <tr className="w-full text-black text-center md:text-left">
-        <th className="py-2">Task Title</th>
-        <th className="py-2">Priority</th>
-        <th className="py-2">Created</th>
+        <th onClick={() => setValue("title")} className="py-2">
+          <span className="flex items-center">
+            Title
+            <span className="ml-1">
+              <BiChevronDown className="cursor-pointer" />
+            </span>
+          </span>
+        </th>
+        <th onClick={() => setValue("priority")} className="py-2">
+          <span className="flex items-center">
+            Priority
+            <span className="ml-1">
+              <BiChevronDown className="cursor-pointer" />
+            </span>
+          </span>
+        </th>
+        <th onClick={() => setValue("date")} className="py-2">
+          <span className="flex items-center">
+            Created
+            <span className="ml-1">
+              <BiChevronDown className="cursor-pointer" />
+            </span>
+          </span>
+        </th>
         <th className="py-2 pr-2">Assets</th>
-        <th className="py-2">Team</th>
-        <th className="py-2 md:py-5">Actions</th>
+        <th className="py-2">Team </th>
+        <th className="py-2 ">Actions</th>
       </tr>
     </thead>
   );
@@ -160,9 +181,9 @@ const Table = ({ tasks }) => {
 
   return (
     <>
-      <div className="bg-white  px-2 md:px-4 pt-4 pb-9 shadow-md rounded">
+      <div className="bg-white px-1 md:px-4 pt-4 pb-9 shadow-md rounded">
         <div className="overflow-x-auto">
-          <table className="w-full ">
+          <table className="w-full">
             <TableHeader />
             <tbody>
               {tasks.map((task, index) => (

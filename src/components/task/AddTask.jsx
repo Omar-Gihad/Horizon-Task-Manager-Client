@@ -13,11 +13,10 @@ import {
 } from "../../redux/slices/apiSlice";
 import { toast } from "sonner";
 
-
 const LISTS = ["TODO", "IN-PROGRESS", "COMPLETED"];
 const PRIORITY = ["HIGH", "MEDIUM", "NORMAL", "LOW"];
 
-const AddTask = ({ open, setOpen, task }) => {
+const AddTask = ({ open, setOpen, task, label }) => {
   // console.log("🚀 ~ AddTask ~ task:", task)
   const {
     register,
@@ -28,7 +27,7 @@ const AddTask = ({ open, setOpen, task }) => {
   } = useForm();
 
   const [team, setTeam] = useState([]);
-  const [stage, setStage] = useState(LISTS[0]);
+  const [stage, setStage] = useState(label);
   const [priority, setPriority] = useState(PRIORITY[2]);
   const [assets, setAssets] = useState([]);
   const [uploading, setUploading] = useState(false);

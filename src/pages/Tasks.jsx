@@ -34,8 +34,7 @@ const Tasks = () => {
   const [selected, setSelected] = useState(0);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("date");
-  const [filteredTasks, setFilteredTasks] = useState([]); // State to store filtered tasks
-
+  const [filteredTasks, setFilteredTasks] = useState([]);
   const status = params?.status || "";
 
   // Fetch tasks using RTK Query
@@ -85,18 +84,18 @@ const Tasks = () => {
             onClick={() => setOpen(true)}
             label="Create Task"
             icon={<IoMdAdd className="text-lg" />}
-            className="flex flex-row-reverse gap-1 items-center bg-[#6b43dd] text-white rounded-md py-2 2xl:py-2.5"
+            className="hidden md:flex flex-row-reverse gap-1 items-center bg-[#6b43dd] text-white rounded-md py-2 2xl:py-2.5"
           />
         )}
       </div>
 
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col-reverse gap-2 md:gap-0 md:flex-row md:justify-between md:items-center">
         <Tabs tabs={TABS} setSelected={setSelected}></Tabs>
-        <SortBy value={value} setValue={setValue} />
+        {selected == 0 && <SortBy value={value} setValue={setValue} />}
       </div>
 
       {!status && (
-        <div className="w-full flex justify-between gap-4 py-4">
+        <div className="w-full flex flex-col md:flex-row justify-between gap-4 md:gap-10 py-4">
           <TaskTitle label="To Do" className={TASK_TYPE.todo} />
           <TaskTitle label="In Progress" className={TASK_TYPE["in-progress"]} />
           <TaskTitle label="Completed" className={TASK_TYPE.completed} />
@@ -107,7 +106,7 @@ const Tasks = () => {
         <BoardView tasks={filteredTasks} />
       ) : (
         <div className="w-full">
-          <Table tasks={filteredTasks} />
+          <Table tasks={filteredTasks} setValue={setValue} />
         </div>
       )}
 

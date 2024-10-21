@@ -12,6 +12,7 @@ import {
   useUpdateTaskMutation,
 } from "../../redux/slices/apiSlice";
 import { toast } from "sonner";
+import { capitalize } from "../../utils";
 
 const LISTS = ["TODO", "IN-PROGRESS", "COMPLETED"];
 const PRIORITY = ["HIGH", "MEDIUM", "NORMAL", "LOW"];
@@ -49,7 +50,7 @@ const AddTask = ({ open, setOpen, task, label }) => {
 
   const submitHandler = async (data) => {
     const taskData = {
-      title: data.title,
+      title: capitalize(data.title),
       date: data.date,
       team,
       stage,

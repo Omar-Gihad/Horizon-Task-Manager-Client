@@ -4,6 +4,7 @@ import { Dialog } from "@headlessui/react";
 import Textbox from "../Textbox";
 import Button from "../Button";
 import { useAddSubTaskMutation } from "../../redux/slices/apiSlice"; // Import the mutation hook
+import { capitalize } from "../../utils";
 
 const AddSubTask = ({ open, setOpen, id }) => {
   // console.log("🚀 ~ AddSubTask ~ id:", id)
@@ -18,7 +19,7 @@ const AddSubTask = ({ open, setOpen, id }) => {
 
   const handleOnSubmit = async (data) => {
     const subTaskData = {
-      title: data.title,
+      title: capitalize(data.title),
       date: data.date,
       tag: data.tag,
     };

@@ -1,6 +1,5 @@
 export const API = "https://server-horizon.vercel.app/api";
 
-
 export const formatDate = (date) => {
   // Get the month, day, and year
   const month = date.toLocaleString("en-US", { month: "short" });
@@ -35,6 +34,13 @@ export function getInitials(fullName) {
   const initialsStr = initials?.join("");
 
   return initialsStr;
+}
+
+export function capitalize(str) {
+  return str
+    .split(" ") // Split the string into words
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter of each word
+    .join(" "); // Join the words back into a string
 }
 
 export const PRIOTITYSTYELS = {

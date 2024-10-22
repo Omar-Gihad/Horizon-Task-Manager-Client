@@ -37,22 +37,31 @@ const Tasks = () => {
   const [filteredTasks, setFilteredTasks] = useState([]);
   const status = params?.status || "";
 
+  const { value: searchValue } = useSelector((state) => state.search); // Accessing the search value from Redux state
+
   // Fetch tasks using RTK Query
   const { data: tasksData, isLoading, error } = useGetTasksQuery();
 
-  // Memoize the tasks data to avoid triggering `useEffect` on every render
+  // Memoize the tasks data to avoid triggering unnecessary re-renders
   const tasks = useMemo(() => tasksData?.tasks || [], [tasksData]);
 
-  // Sorting tasks based on the selected value (Date, Priority, or Title)
+  // Handle filtering and sorting tasks
   useEffect(() => {
     let unTrashedTasks = tasks.filter((item) => !item.isTrashed);
 
-    // Filter tasks based on status
+    // Filter tasks based on the search value
+    if (searchValue) {
+      unTrashedTasks = unTrashedTasks.filter((task) =>
+        task.title.toLowerCase().includes(searchValue.trim().toLowerCase())
+      );
+    }
+
+    // Filter tasks based on status from URL params
     if (status) {
       unTrashedTasks = unTrashedTasks.filter((el) => el.stage === status);
     }
 
-    // Sorting tasks based on the selected value (Date, Priority, or Title)
+    // Sort tasks based on selected value (Date, Priority, Title)
     if (value === "date") {
       unTrashedTasks = unTrashedTasks.sort(
         (a, b) => new Date(b.date) - new Date(a.date)
@@ -67,9 +76,9 @@ const Tasks = () => {
       );
     }
 
-    // Set the filtered tasks once after filtering and sorting
+    // Set the filtered and sorted tasks
     setFilteredTasks(unTrashedTasks);
-  }, [tasks, status, value]);
+  }, [tasks, status, value, searchValue]); // Added `searchValue` as a dependency
 
   if (isLoading) return <Loading />;
   if (error) return <div>Failed to load tasks.</div>;
@@ -79,6 +88,7 @@ const Tasks = () => {
       <div className="flex items-center justify-between mb-4">
         <Title title={status ? `${status} Tasks` : "Tasks"} />
 
+        {/* Only allow task creation if the user is an admin */}
         {!status && user.data.user.isAdmin && (
           <Button
             onClick={() => setOpen(true)}
@@ -91,7 +101,7 @@ const Tasks = () => {
 
       <div className="flex flex-col-reverse gap-2 md:gap-0 md:flex-row md:justify-between md:items-center">
         <Tabs tabs={TABS} setSelected={setSelected}></Tabs>
-        {selected == 0 && <SortBy value={value} setValue={setValue} />}
+        {selected === 0 && <SortBy value={value} setValue={setValue} />}
       </div>
 
       {!status && (
@@ -102,6 +112,7 @@ const Tasks = () => {
         </div>
       )}
 
+      {/* Toggle between Board View and List View */}
       {selected !== 1 ? (
         <BoardView tasks={filteredTasks} />
       ) : (
@@ -110,6 +121,7 @@ const Tasks = () => {
         </div>
       )}
 
+      {/* Add Task Modal */}
       <AddTask open={open} setOpen={setOpen} />
     </div>
   );

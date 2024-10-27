@@ -20,6 +20,7 @@ const Users = () => {
 
   // Fetch tasks using RTK Query
   const { data: usersData, isLoading, error } = useGetUsersQuery();
+  console.log("🚀 ~ Users ~ usersData:", usersData)
 
   // Check loading and error states
   if (isLoading) return <Loading />;

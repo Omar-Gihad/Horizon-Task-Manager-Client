@@ -17,6 +17,7 @@ import { useSelector } from "react-redux";
 import { useTrashTaskMutation } from "../../redux/slices/apiSlice";
 import AddTask from "./AddTask";
 import { useNavigate } from "react-router-dom";
+import moment from "moment";
 
 const ICONS = {
   high: <MdKeyboardDoubleArrowUp />,
@@ -133,6 +134,7 @@ const Table = ({ tasks, setValue }) => {
       <td className="py-2 pr-2">
         <span className="text-sm text-gray-600">
           {formatDate(new Date(task?.date))}
+          {/* {moment(task?.date).fromNow()} */}
         </span>
       </td>
 

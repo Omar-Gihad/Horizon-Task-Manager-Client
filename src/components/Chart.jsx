@@ -24,7 +24,7 @@ const Chart = () => {
   console.log("🚀 ~ Tasks ~ tasks:", tasks);
 
   const UnTrashedtasks = tasks.filter((item) => !item.isTrashed);
-  console.log("🚀 ~ Chart ~ UnTrashedtasks:", UnTrashedtasks);
+  // console.log("🚀 ~ Chart ~ UnTrashedtasks:", UnTrashedtasks);
 
   // Calculate total tasks for each priority (High, Medium, Normal)
   const highTasks = UnTrashedtasks.filter((task) => task.priority === "high");
